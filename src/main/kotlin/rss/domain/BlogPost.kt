@@ -9,4 +9,3 @@ data class BlogPost(
         return trimmedKeyword in metaData.title || trimmedKeyword in content
     }
 }
-

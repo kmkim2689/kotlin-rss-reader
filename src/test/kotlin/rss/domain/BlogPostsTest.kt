@@ -3,7 +3,6 @@ package rss.domain
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
-import java.time.temporal.TemporalAmount
 
 class BlogPostsTest {
     @Test
@@ -18,76 +17,96 @@ class BlogPostsTest {
         assertThat(blogPosts.posts()).isEqualTo(
             listOf(
                 BlogPost(
-                    metaData = MetaData(
-                        title = "게시글10",
-                        url = "https://velog.io/@kmkim2689",
-                        pubDate = LocalDateTime.parse("2024-06-10T01:01:01")
-                    ), content = "게시글 내용10"
+                    metaData =
+                        MetaData(
+                            title = "게시글10",
+                            url = "https://velog.io/@kmkim2689",
+                            pubDate = LocalDateTime.parse("2024-06-10T01:01:01"),
+                        ),
+                    content = "게시글 내용10",
                 ),
                 BlogPost(
-                    metaData = MetaData(
-                        title = "게시글9",
-                        url = "https://velog.io/@kmkim2689",
-                        pubDate = LocalDateTime.parse("2024-06-09T01:01:01")
-                    ), content = "게시글 내용9"
+                    metaData =
+                        MetaData(
+                            title = "게시글9",
+                            url = "https://velog.io/@kmkim2689",
+                            pubDate = LocalDateTime.parse("2024-06-09T01:01:01"),
+                        ),
+                    content = "게시글 내용9",
                 ),
                 BlogPost(
-                    metaData = MetaData(
-                        title = "게시글8",
-                        url = "https://velog.io/@kmkim2689",
-                        pubDate = LocalDateTime.parse("2024-06-08T01:01:01")
-                    ), content = "게시글 내용8"
+                    metaData =
+                        MetaData(
+                            title = "게시글8",
+                            url = "https://velog.io/@kmkim2689",
+                            pubDate = LocalDateTime.parse("2024-06-08T01:01:01"),
+                        ),
+                    content = "게시글 내용8",
                 ),
                 BlogPost(
-                    metaData = MetaData(
-                        title = "게시글7",
-                        url = "https://velog.io/@kmkim2689",
-                        pubDate = LocalDateTime.parse("2024-06-07T01:01:01")
-                    ), content = "게시글 내용7"
+                    metaData =
+                        MetaData(
+                            title = "게시글7",
+                            url = "https://velog.io/@kmkim2689",
+                            pubDate = LocalDateTime.parse("2024-06-07T01:01:01"),
+                        ),
+                    content = "게시글 내용7",
                 ),
                 BlogPost(
-                    metaData = MetaData(
-                        title = "게시글6",
-                        url = "https://velog.io/@kmkim2689",
-                        pubDate = LocalDateTime.parse("2024-06-06T01:01:01")
-                    ), content = "게시글 내용6"
+                    metaData =
+                        MetaData(
+                            title = "게시글6",
+                            url = "https://velog.io/@kmkim2689",
+                            pubDate = LocalDateTime.parse("2024-06-06T01:01:01"),
+                        ),
+                    content = "게시글 내용6",
                 ),
                 BlogPost(
-                    metaData = MetaData(
-                        title = "게시글5",
-                        url = "https://velog.io/@kmkim2689",
-                        pubDate = LocalDateTime.parse("2024-06-05T01:01:01")
-                    ), content = "게시글 내용5"
+                    metaData =
+                        MetaData(
+                            title = "게시글5",
+                            url = "https://velog.io/@kmkim2689",
+                            pubDate = LocalDateTime.parse("2024-06-05T01:01:01"),
+                        ),
+                    content = "게시글 내용5",
                 ),
                 BlogPost(
-                    metaData = MetaData(
-                        title = "게시글4",
-                        url = "https://velog.io/@kmkim2689",
-                        pubDate = LocalDateTime.parse("2024-06-04T01:01:01")
-                    ), content = "게시글 내용4"
+                    metaData =
+                        MetaData(
+                            title = "게시글4",
+                            url = "https://velog.io/@kmkim2689",
+                            pubDate = LocalDateTime.parse("2024-06-04T01:01:01"),
+                        ),
+                    content = "게시글 내용4",
                 ),
                 BlogPost(
-                    metaData = MetaData(
-                        title = "게시글3",
-                        url = "https://velog.io/@kmkim2689",
-                        pubDate = LocalDateTime.parse("2024-06-03T01:01:01")
-                    ), content = "게시글 내용3"
+                    metaData =
+                        MetaData(
+                            title = "게시글3",
+                            url = "https://velog.io/@kmkim2689",
+                            pubDate = LocalDateTime.parse("2024-06-03T01:01:01"),
+                        ),
+                    content = "게시글 내용3",
                 ),
                 BlogPost(
-                    metaData = MetaData(
-                        title = "게시글2",
-                        url = "https://velog.io/@kmkim2689",
-                        pubDate = LocalDateTime.parse("2024-06-02T01:01:01")
-                    ), content = "게시글 내용2"
+                    metaData =
+                        MetaData(
+                            title = "게시글2",
+                            url = "https://velog.io/@kmkim2689",
+                            pubDate = LocalDateTime.parse("2024-06-02T01:01:01"),
+                        ),
+                    content = "게시글 내용2",
                 ),
                 BlogPost(
-                    metaData = MetaData(
-                        title = "게시글1",
-                        url = "https://velog.io/@kmkim2689",
-                        pubDate = LocalDateTime.parse("2024-06-01T01:01:01")
-                    ), content = "게시글 내용1"
+                    metaData =
+                        MetaData(
+                            title = "게시글1",
+                            url = "https://velog.io/@kmkim2689",
+                            pubDate = LocalDateTime.parse("2024-06-01T01:01:01"),
+                        ),
+                    content = "게시글 내용1",
                 ),
-            )
+            ),
         )
     }
 
@@ -109,9 +128,9 @@ class BlogPostsTest {
                 MetaData(
                     "게시글${index + 1}",
                     "https://velog.io/@kmkim2689",
-                    LocalDateTime.of(2024, 6, 1, 1, 1, 1).plusDays(index.toLong())
+                    LocalDateTime.of(2024, 6, 1, 1, 1, 1).plusDays(index.toLong()),
                 ),
-                content = "게시글 내용${index + 1}"
+                content = "게시글 내용${index + 1}",
             )
         }
     }
