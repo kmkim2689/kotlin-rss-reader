@@ -1,8 +1,11 @@
 package rss.domain
 
+import java.time.LocalDateTime
+
 data class MetaData(
     val title: String,
     val url: String,
+    val pubDate: LocalDateTime,
 ) {
     init {
         require(title.trim().isNotEmpty()) { EXCEPTION_EMPTY_TITLE }

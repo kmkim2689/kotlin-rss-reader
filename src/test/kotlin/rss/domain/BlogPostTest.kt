@@ -3,6 +3,7 @@ package rss.domain
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import java.time.LocalDateTime
 
 class BlogPostTest {
     @ParameterizedTest
@@ -17,6 +18,7 @@ class BlogPostTest {
                 metaData = MetaData(
                     title = "케이엠의 동등성과 동일성",
                     url = "https://velog.com",
+                    pubDate = LocalDateTime.now()
                 ),
                 content = "케이엠입니다.",
             )
