@@ -6,7 +6,6 @@ import rss.domain.collection.Blog
 import rss.domain.post.BlogPost
 import rss.domain.post.MetaData
 import java.time.LocalDateTime
-import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
@@ -34,11 +33,11 @@ fun BlogPostResponse.toBlogPost(): BlogPost {
 }
 
 private fun String.toLocalDateTime(
-    dateTimePattern: String = "EEE, dd MMM yyyy HH:mm:ss z",
+    dateTimePattern: String = "EEE, dd MMM yyyy HH:mm:ss",
     dateTimeLocale: Locale = Locale.ENGLISH,
 ): LocalDateTime {
+    val dateTimeWithoutTimeZone = this.split(" ").dropLast(1).joinToString(" ")
     val formatter = DateTimeFormatter.ofPattern(dateTimePattern, dateTimeLocale)
-    val zonedDateTime = ZonedDateTime.parse(this, formatter)
-    val localDateTime = zonedDateTime.toLocalDateTime()
+    val localDateTime = LocalDateTime.parse(dateTimeWithoutTimeZone, formatter)
     return localDateTime
 }
