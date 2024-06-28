@@ -1,4 +1,7 @@
-package rss.domain
+package rss.domain.repository
+
+import rss.domain.Sort
+import rss.domain.collection.Blog
 
 interface BlogsRepository {
     suspend fun blogs(

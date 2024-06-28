@@ -1,9 +1,9 @@
-package rss.data
+package rss.data.repository
 
-import rss.domain.Blog
-import rss.domain.BlogPost
-import rss.domain.BlogRepository
-import rss.domain.MetaData
+import rss.domain.collection.Blog
+import rss.domain.post.BlogPost
+import rss.domain.repository.BlogRepository
+import rss.domain.post.MetaData
 import rss.domain.Sort
 import java.time.LocalDateTime
 

@@ -1,4 +1,4 @@
-package rss.domain
+package rss.domain.post
 
 class BlogPosts(
     private var values: List<Post> = emptyList(),

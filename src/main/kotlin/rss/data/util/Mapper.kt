@@ -2,9 +2,9 @@ package rss.data.util
 
 import rss.data.model.BlogPostResponse
 import rss.data.model.BlogResponse
-import rss.domain.Blog
-import rss.domain.BlogPost
-import rss.domain.MetaData
+import rss.domain.collection.Blog
+import rss.domain.post.BlogPost
+import rss.domain.post.MetaData
 import java.time.LocalDateTime
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter

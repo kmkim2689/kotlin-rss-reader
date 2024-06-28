@@ -1,10 +1,10 @@
-package rss.data
+package rss.data.repository
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
-import rss.domain.Blog
-import rss.domain.BlogsRepository
+import rss.domain.collection.Blog
+import rss.domain.repository.BlogsRepository
 import rss.domain.Sort
 
 class FakeBlogsRepository(

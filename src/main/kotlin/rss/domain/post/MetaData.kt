@@ -1,4 +1,4 @@
-package rss.domain
+package rss.domain.post
 
 import java.time.LocalDateTime
 

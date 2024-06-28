@@ -1,6 +1,9 @@
-package rss.domain
+package rss.domain.collection
 
 import rss.data.model.ImageResponse
+import rss.domain.post.BlogPost
+import rss.domain.post.BlogPosts
+import rss.domain.post.Post
 import java.time.LocalDateTime
 
 class Blog(

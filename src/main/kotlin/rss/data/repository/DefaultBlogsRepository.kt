@@ -5,9 +5,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
-import rss.domain.Blog
-import rss.domain.BlogRepository
-import rss.domain.BlogsRepository
+import rss.domain.collection.Blog
+import rss.domain.repository.BlogRepository
+import rss.domain.repository.BlogsRepository
 import rss.domain.Sort
 
 class DefaultBlogsRepository(

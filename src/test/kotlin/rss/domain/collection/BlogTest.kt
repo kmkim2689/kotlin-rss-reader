@@ -1,4 +1,4 @@
-package rss.domain
+package rss.domain.collection
 
 import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
+import rss.domain.collection.Blog
+import rss.domain.post.BlogPost
+import rss.domain.post.MetaData
 import java.time.LocalDateTime
 
 class BlogTest {

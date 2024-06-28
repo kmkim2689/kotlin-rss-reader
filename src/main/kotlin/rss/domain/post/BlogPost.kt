@@ -1,4 +1,4 @@
-package rss.domain
+package rss.domain.post
 
 data class BlogPost(
     override val metaData: MetaData,

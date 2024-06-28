@@ -1,4 +1,4 @@
-package rss.domain
+package rss.domain.post
 
 interface Post {
     val metaData: MetaData

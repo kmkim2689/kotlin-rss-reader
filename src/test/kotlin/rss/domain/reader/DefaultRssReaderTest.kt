@@ -1,10 +1,9 @@
-package rss.domain
+package rss.domain.reader
 
 import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertAll
-import rss.data.FakeBlogsRepository
+import rss.data.repository.FakeBlogsRepository
 
 class DefaultRssReaderTest {
     @Test
