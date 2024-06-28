@@ -3,7 +3,10 @@ package rss.view
 import rss.domain.post.Post
 
 object KeywordSearchOutputView {
-    fun logContentsByKeyword(keyword: String, posts: List<Post>) {
+    fun logContentsByKeyword(
+        keyword: String,
+        posts: List<Post>,
+    ) {
         println("\n<$keyword> 검색 결과 : ${posts.size}건")
         println("=================================================================================================")
         posts.forEachIndexed { index, post ->

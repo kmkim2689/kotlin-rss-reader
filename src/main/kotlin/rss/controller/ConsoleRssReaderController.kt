@@ -9,10 +9,10 @@ import rss.domain.Sort
 import rss.domain.reader.DefaultRssReader
 import rss.domain.repository.BlogsRepository
 import rss.view.BlogContentOutputView
-import rss.view.UrlInputView
 import rss.view.KeywordSearchInputView
 import rss.view.KeywordSearchOutputView
 import rss.view.LoadingView
+import rss.view.UrlInputView
 
 class ConsoleRssReaderController(
     private val blogsRepository: BlogsRepository,
@@ -45,13 +45,14 @@ class ConsoleRssReaderController(
     }
 
     private fun launchSearchingKeyword() {
-        searchingJob = scope.launch {
-            while (isActive) {
-                val keyword = KeywordSearchInputView.keyword()
-                val posts = reader.postsWithKeyword(keyword, DEFAULT_COUNT)
-                KeywordSearchOutputView.logContentsByKeyword(keyword, posts)
+        searchingJob =
+            scope.launch {
+                while (isActive) {
+                    val keyword = KeywordSearchInputView.keyword()
+                    val posts = reader.postsWithKeyword(keyword, DEFAULT_COUNT)
+                    KeywordSearchOutputView.logContentsByKeyword(keyword, posts)
+                }
             }
-        }
     }
 
     private suspend fun updateBlogContents() {

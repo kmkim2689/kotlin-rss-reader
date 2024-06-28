@@ -7,11 +7,12 @@ import rss.data.datasource.DefaultBlogRemoteDataSource
 import rss.data.repository.DefaultBlogRepository
 import rss.data.repository.DefaultBlogsRepository
 
-suspend fun main() = coroutineScope<Unit> {
-    launch {
-        ConsoleRssReaderController(
-            DefaultBlogsRepository(DefaultBlogRepository(DefaultBlogRemoteDataSource()), this),
-            this,
-        ).start()
+suspend fun main() =
+    coroutineScope<Unit> {
+        launch {
+            ConsoleRssReaderController(
+                DefaultBlogsRepository(DefaultBlogRepository(DefaultBlogRemoteDataSource()), this),
+                this,
+            ).start()
+        }
     }
-}

@@ -7,7 +7,7 @@ import rss.domain.post.BlogPost
 import rss.domain.post.MetaData
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
+import java.util.Locale
 
 fun BlogResponse.toBlog(count: Int): Blog =
     Blog(
@@ -23,11 +23,12 @@ fun BlogPostResponse.toBlogPost(): BlogPost {
     val localDateTime = pubDate.toLocalDateTime()
 
     return BlogPost(
-        metaData = MetaData(
-            title = title,
-            postUrl = link,
-            pubDate = localDateTime
-        ),
+        metaData =
+            MetaData(
+                title = title,
+                postUrl = link,
+                pubDate = localDateTime,
+            ),
         content = description,
     )
 }

@@ -1,26 +1,30 @@
 package rss.data.repository
 
+import rss.domain.Sort
 import rss.domain.collection.Blog
 import rss.domain.post.BlogPost
-import rss.domain.repository.BlogRepository
 import rss.domain.post.MetaData
-import rss.domain.Sort
+import rss.domain.repository.BlogRepository
 import java.time.LocalDateTime
 
 class FakeBlogRepository : BlogRepository {
     private var trial = 1
     private var blogCount = 0
 
-    override suspend fun blog(url: String, count: Int, sort: Sort): Result<Blog> {
+    override suspend fun blog(
+        url: String,
+        count: Int,
+        sort: Sort,
+    ): Result<Blog> {
         return runCatching {
             blogCount++
             Blog(
                 title = "blog $blogCount",
-                link = "https://blog${blogCount}.com",
+                link = "https://blog$blogCount.com",
                 description = "description $blogCount",
                 lastBuildDate = LocalDateTime.now(),
                 imageResponse = null,
-                items = posts(trial, count)
+                items = posts(trial, count),
             )
         }
     }

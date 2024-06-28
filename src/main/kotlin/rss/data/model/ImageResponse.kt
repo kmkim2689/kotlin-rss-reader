@@ -5,4 +5,3 @@ data class ImageResponse(
     val url: String,
     val link: String,
 )
-

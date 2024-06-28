@@ -3,8 +3,6 @@ package rss.domain.post
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
-import rss.domain.post.BlogPost
-import rss.domain.post.MetaData
 import java.time.LocalDateTime
 
 class BlogPostTest {

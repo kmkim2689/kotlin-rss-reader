@@ -16,9 +16,10 @@ class DefaultBlogRemoteDataSource : BlogRemoteDataSource {
 
     // TODO 함수 분리하기
     override suspend fun postsByUrl(url: String): BlogResponse {
-        val xml = withContext(Dispatchers.IO) {
-            factory.newDocumentBuilder().parse(url)
-        }
+        val xml =
+            withContext(Dispatchers.IO) {
+                factory.newDocumentBuilder().parse(url)
+            }
         val channels = xml.getElementsByTagName("channel")
 
         val channelNode = channels.item(0)
@@ -37,18 +38,19 @@ class DefaultBlogRemoteDataSource : BlogRemoteDataSource {
 
         val itemTags = channelDocument.getElementsByTagName("item")
 
-        val items = (0..<itemTags.length).map { index ->
-            withContext(Dispatchers.Default) {
-                async {
-                    val itemDocument = itemTags.item(index).ownerDocument
-                    val itemTitle = itemDocument.parseTextContent("title", index)
-                    val itemLink = itemDocument.parseTextContent("link", index)
-                    val itemPubDate = itemDocument.parseTextContent("pubDate", index)
-                    val itemDescription = itemDocument.parseTextContent("description", index)
-                    BlogPostResponse(itemTitle.await(), itemLink.await(), itemPubDate.await(), itemDescription.await())
+        val items =
+            (0..<itemTags.length).map { index ->
+                withContext(Dispatchers.Default) {
+                    async {
+                        val itemDocument = itemTags.item(index).ownerDocument
+                        val itemTitle = itemDocument.parseTextContent("title", index)
+                        val itemLink = itemDocument.parseTextContent("link", index)
+                        val itemPubDate = itemDocument.parseTextContent("pubDate", index)
+                        val itemDescription = itemDocument.parseTextContent("description", index)
+                        BlogPostResponse(itemTitle.await(), itemLink.await(), itemPubDate.await(), itemDescription.await())
+                    }
                 }
             }
-        }
 
         return BlogResponse(
             title = title.await(),
@@ -56,7 +58,7 @@ class DefaultBlogRemoteDataSource : BlogRemoteDataSource {
             description = description.await(),
             lastBuildDate = lastBuildDate.await(),
             imageResponse = imageResponse,
-            items = items.awaitAll()
+            items = items.awaitAll(),
         )
     }
 
@@ -66,10 +68,11 @@ class DefaultBlogRemoteDataSource : BlogRemoteDataSource {
     ): Deferred<String> {
         return withContext(Dispatchers.Default) {
             async {
-                val child = this@parseTextContent
-                    .getElementsByTagName(tagName)
-                    .item(index)
-                    .firstChild
+                val child =
+                    this@parseTextContent
+                        .getElementsByTagName(tagName)
+                        .item(index)
+                        .firstChild
                 child?.textContent ?: "없음" // TODO data단에서 할 일은 아님...
             }
         }

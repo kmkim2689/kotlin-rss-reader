@@ -1,6 +1,6 @@
 package rss.domain
 
 enum class Sort {
-    LATEST, 
+    LATEST,
     OLDEST,
 }

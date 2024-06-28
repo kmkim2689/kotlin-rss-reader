@@ -7,6 +7,6 @@ interface BlogRepository {
     suspend fun blog(
         url: String,
         count: Int,
-        sort: Sort
+        sort: Sort,
     ): Result<Blog>
 }
