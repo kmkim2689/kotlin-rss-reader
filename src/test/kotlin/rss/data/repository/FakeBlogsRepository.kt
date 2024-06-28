@@ -27,6 +27,8 @@ class FakeBlogsRepository(
         count: Int,
         sort: Sort,
     ) = scope.async {
-        blogRepository.blog(url, count, sort).getOrNull()
+        blogRepository
+            .blog(url, count, sort)
+            .getOrNull()
     }
 }

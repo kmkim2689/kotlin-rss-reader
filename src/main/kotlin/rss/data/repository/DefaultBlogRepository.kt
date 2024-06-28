@@ -14,7 +14,7 @@ class DefaultBlogRepository(
         count: Int,
         sort: Sort,
     ): Result<Blog> {
-        return kotlin.runCatching {
+        return runCatching {
             blogRemoteDataSource
                 .postsByUrl(url)
                 .toBlog(count)

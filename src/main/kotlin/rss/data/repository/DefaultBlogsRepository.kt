@@ -12,7 +12,7 @@ import rss.domain.Sort
 
 class DefaultBlogsRepository(
     private val blogRepository: BlogRepository,
-    private val scope: CoroutineScope = CoroutineScope(Job() + Dispatchers.IO),
+    private val scope: CoroutineScope,
 ) : BlogsRepository {
     override suspend fun blogs(
         urls: List<String>,
@@ -32,8 +32,10 @@ class DefaultBlogsRepository(
         url: String,
         count: Int,
         sort: Sort,
-    ) = scope.async {
-        blogRepository.blog(url, count, sort).getOrNull()
+    ) = scope.async(Dispatchers.IO) {
+        blogRepository
+            .blog(url, count, sort)
+            .getOrNull()
     }
 }
 
