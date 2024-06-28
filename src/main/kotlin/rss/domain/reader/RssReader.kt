@@ -1,13 +1,18 @@
 package rss.domain.reader
 
 import rss.domain.Sort
-import rss.domain.collection.PostCollection
+import rss.domain.post.Post
 
 interface RssReader {
-    suspend fun updatedBlogs(
+    suspend fun updateBlogs(
         count: Int,
         sortBy: Sort,
-    ): List<PostCollection>
+    )
+
+    fun postsWithKeyword(
+        keyword: String,
+        count: Int,
+    ): List<Post>
 }
 
 
