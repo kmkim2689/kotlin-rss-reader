@@ -3,6 +3,9 @@ package rss.domain
 import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 import rss.data.FakeBlogPostRepository
 import java.time.LocalDateTime
 
@@ -12,11 +15,10 @@ class BlogTest {
         runTest {
             // given
             val blog = Blog("https://velog.io/@kmkim2689")
-            val fakeBlogPostRepository = FakeBlogPostRepository()
 
             // when
             repeat(2) {
-                blog.update(fakeBlogPostRepository.postsByUrl("https://velog.io/@kmkim2689", 10))
+                blog.update(postFixtures(it + 1, 10))
             }
 
             // then
@@ -115,4 +117,29 @@ class BlogTest {
                 ),
             )
         }
+
+    @ParameterizedTest
+    @ValueSource(strings = ["velog.io/@kmkim2689", "file://velog.io/", "http://velog.io/"])
+    fun `블로그 주소가 올바르지 않은 프로토콜을 가지면 예외가 발생한다`(blogUrl: String) {
+        assertThrows<IllegalArgumentException> {
+            Blog(blogUrl)
+        }
+    }
+
+    private fun postFixtures(
+        trial: Int,
+        count: Int,
+    ): List<BlogPost> {
+        return List(count) {
+            BlogPost(
+                metaData =
+                MetaData(
+                    title = "게시글${trial + it}",
+                    postUrl = "https://velog.io/@kmkim2689",
+                    pubDate = LocalDateTime.of(2024, 6, 1, 1, 1, 1).plusDays(trial.toLong() + it.toLong()),
+                ),
+                content = "게시글 내용${trial + it}",
+            )
+        }
+    }
 }

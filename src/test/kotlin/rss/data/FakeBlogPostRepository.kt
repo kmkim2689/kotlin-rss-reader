@@ -1,18 +1,17 @@
 package rss.data
 
 import rss.domain.BlogPost
-import rss.domain.BlogPostRepository
+import rss.domain.BlogRepository
 import rss.domain.MetaData
+import rss.domain.Post
+import rss.domain.Sort
 import java.time.LocalDateTime
 
-class FakeBlogPostRepository : BlogPostRepository {
+class FakeBlogRepository : BlogRepository {
     private var trial = 1
 
-    override suspend fun postsByUrl(
-        url: String,
-        count: Int,
-    ): List<BlogPost> {
-        return posts(trial++, count)
+    override suspend fun postsByUrl(url: String, count: Int, sort: Sort): List<Post> {
+        return posts(trial, count)
     }
 
     private fun posts(
