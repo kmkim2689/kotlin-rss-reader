@@ -18,7 +18,7 @@ class BlogPostTest {
                 metaData =
                     MetaData(
                         title = "케이엠의 동등성과 동일성",
-                        url = "https://velog.com",
+                        postUrl = "https://velog.com",
                         pubDate = LocalDateTime.now(),
                     ),
                 content = "케이엠입니다.",

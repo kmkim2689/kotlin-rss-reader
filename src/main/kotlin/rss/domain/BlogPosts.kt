@@ -1,13 +1,13 @@
 package rss.domain
 
 class BlogPosts(
-    private var values: List<BlogPost> = emptyList(),
+    private var values: List<Post> = emptyList(),
 ) {
     init {
         arrange()
     }
 
-    fun posts(count: Int = DEFAULT_POST_COUNT): List<BlogPost> = values.take(count)
+    fun contents(count: Int = DEFAULT_POST_COUNT): List<Post> = values.take(count)
 
     private fun arrange() {
         values = values.sortedByDescending { it.metaData.pubDate }

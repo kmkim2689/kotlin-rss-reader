@@ -14,13 +14,13 @@ class BlogPostsTest {
         val blogPosts = BlogPosts(posts)
 
         // then
-        assertThat(blogPosts.posts()).isEqualTo(
+        assertThat(blogPosts.contents(10)).isEqualTo(
             listOf(
                 BlogPost(
                     metaData =
                         MetaData(
                             title = "게시글10",
-                            url = "https://velog.io/@kmkim2689",
+                            postUrl = "https://velog.io/@kmkim2689",
                             pubDate = LocalDateTime.parse("2024-06-10T01:01:01"),
                         ),
                     content = "게시글 내용10",
@@ -29,7 +29,7 @@ class BlogPostsTest {
                     metaData =
                         MetaData(
                             title = "게시글9",
-                            url = "https://velog.io/@kmkim2689",
+                            postUrl = "https://velog.io/@kmkim2689",
                             pubDate = LocalDateTime.parse("2024-06-09T01:01:01"),
                         ),
                     content = "게시글 내용9",
@@ -38,7 +38,7 @@ class BlogPostsTest {
                     metaData =
                         MetaData(
                             title = "게시글8",
-                            url = "https://velog.io/@kmkim2689",
+                            postUrl = "https://velog.io/@kmkim2689",
                             pubDate = LocalDateTime.parse("2024-06-08T01:01:01"),
                         ),
                     content = "게시글 내용8",
@@ -47,7 +47,7 @@ class BlogPostsTest {
                     metaData =
                         MetaData(
                             title = "게시글7",
-                            url = "https://velog.io/@kmkim2689",
+                            postUrl = "https://velog.io/@kmkim2689",
                             pubDate = LocalDateTime.parse("2024-06-07T01:01:01"),
                         ),
                     content = "게시글 내용7",
@@ -56,7 +56,7 @@ class BlogPostsTest {
                     metaData =
                         MetaData(
                             title = "게시글6",
-                            url = "https://velog.io/@kmkim2689",
+                            postUrl = "https://velog.io/@kmkim2689",
                             pubDate = LocalDateTime.parse("2024-06-06T01:01:01"),
                         ),
                     content = "게시글 내용6",
@@ -65,7 +65,7 @@ class BlogPostsTest {
                     metaData =
                         MetaData(
                             title = "게시글5",
-                            url = "https://velog.io/@kmkim2689",
+                            postUrl = "https://velog.io/@kmkim2689",
                             pubDate = LocalDateTime.parse("2024-06-05T01:01:01"),
                         ),
                     content = "게시글 내용5",
@@ -74,7 +74,7 @@ class BlogPostsTest {
                     metaData =
                         MetaData(
                             title = "게시글4",
-                            url = "https://velog.io/@kmkim2689",
+                            postUrl = "https://velog.io/@kmkim2689",
                             pubDate = LocalDateTime.parse("2024-06-04T01:01:01"),
                         ),
                     content = "게시글 내용4",
@@ -83,7 +83,7 @@ class BlogPostsTest {
                     metaData =
                         MetaData(
                             title = "게시글3",
-                            url = "https://velog.io/@kmkim2689",
+                            postUrl = "https://velog.io/@kmkim2689",
                             pubDate = LocalDateTime.parse("2024-06-03T01:01:01"),
                         ),
                     content = "게시글 내용3",
@@ -92,7 +92,7 @@ class BlogPostsTest {
                     metaData =
                         MetaData(
                             title = "게시글2",
-                            url = "https://velog.io/@kmkim2689",
+                            postUrl = "https://velog.io/@kmkim2689",
                             pubDate = LocalDateTime.parse("2024-06-02T01:01:01"),
                         ),
                     content = "게시글 내용2",
@@ -101,7 +101,7 @@ class BlogPostsTest {
                     metaData =
                         MetaData(
                             title = "게시글1",
-                            url = "https://velog.io/@kmkim2689",
+                            postUrl = "https://velog.io/@kmkim2689",
                             pubDate = LocalDateTime.parse("2024-06-01T01:01:01"),
                         ),
                     content = "게시글 내용1",
@@ -119,7 +119,7 @@ class BlogPostsTest {
         val blogPosts = BlogPosts(posts)
 
         // then
-        assertThat(blogPosts.posts(10)).hasSize(10)
+        assertThat(blogPosts.contents(10)).hasSize(10)
     }
 
     private fun blogPostFixtures(count: Int): List<BlogPost> {

@@ -1,8 +1,8 @@
 package rss.domain
 
 data class BlogPost(
-    val metaData: MetaData,
-    val content: String,
+    override val metaData: MetaData,
+    override val content: String,
 ) : Post {
     override fun contains(keyword: String): Boolean {
         val trimmedKeyword = keyword.trim()
