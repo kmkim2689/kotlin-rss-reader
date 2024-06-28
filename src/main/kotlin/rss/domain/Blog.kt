@@ -2,7 +2,6 @@ package rss.domain
 
 class Blog(
     val blogUrl: String,
-//    private val postRepository: BlogPostRepository,
 ) : PostCollection {
     var posts: BlogPosts = BlogPosts()
         private set
@@ -11,13 +10,7 @@ class Blog(
         require(blogUrl.contains(VALID_PROTOCOL)) { EXCEPTION_INVALID_PROTOCOL }
     }
 
-    override suspend fun update(
-//        url: String,
-//        count: Int,
-        newPosts: List<Post>
-    ) {
-//        val newPosts = postRepository.postsByUrl(url, count)
-
+    override suspend fun update(newPosts: List<Post>) {
         posts = BlogPosts(newPosts)
     }
 

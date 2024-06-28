@@ -6,4 +6,3 @@ interface BlogPostRepository {
         count: Int,
     ): List<BlogPost>
 }
-
