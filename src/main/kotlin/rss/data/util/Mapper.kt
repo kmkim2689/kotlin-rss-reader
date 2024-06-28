@@ -1,19 +1,27 @@
 package rss.data.util
 
 import rss.data.model.BlogPostResponse
+import rss.data.model.BlogResponse
+import rss.domain.Blog
 import rss.domain.BlogPost
 import rss.domain.MetaData
+import java.time.LocalDateTime
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-fun BlogPostResponse.toBlogPost(
-    dateTimePattern: String = "EEE, dd MMM yyyy HH:mm:ss z",
-    dateTimeLocale: Locale = Locale.ENGLISH,
-): BlogPost {
-    val formatter = DateTimeFormatter.ofPattern(dateTimePattern, dateTimeLocale)
-    val zonedDateTime = ZonedDateTime.parse(pubDate, formatter)
-    val localDateTime = zonedDateTime.toLocalDateTime()
+fun BlogResponse.toBlog(count: Int): Blog =
+    Blog(
+        title = title,
+        link = link,
+        description = description,
+        lastBuildDate = lastBuildDate.toLocalDateTime(),
+        imageResponse = imageResponse,
+        items = items.map(BlogPostResponse::toBlogPost).sortedByDescending { it.metaData.pubDate }.take(count),
+    )
+
+fun BlogPostResponse.toBlogPost(): BlogPost {
+    val localDateTime = pubDate.toLocalDateTime()
 
     return BlogPost(
         metaData = MetaData(
@@ -23,4 +31,14 @@ fun BlogPostResponse.toBlogPost(
         ),
         content = description,
     )
+}
+
+private fun String.toLocalDateTime(
+    dateTimePattern: String = "EEE, dd MMM yyyy HH:mm:ss z",
+    dateTimeLocale: Locale = Locale.ENGLISH,
+): LocalDateTime {
+    val formatter = DateTimeFormatter.ofPattern(dateTimePattern, dateTimeLocale)
+    val zonedDateTime = ZonedDateTime.parse(this, formatter)
+    val localDateTime = zonedDateTime.toLocalDateTime()
+    return localDateTime
 }

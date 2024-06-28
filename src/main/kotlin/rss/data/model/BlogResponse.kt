@@ -5,7 +5,6 @@ data class BlogResponse(
     val link: String,
     val description: String,
     val lastBuildDate: String,
-    val image: Image?,
+    val imageResponse: ImageResponse?,
     val items: List<BlogPostResponse>,
 )
-

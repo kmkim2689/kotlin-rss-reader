@@ -1,13 +1,21 @@
 package rss.domain
 
+import rss.data.model.ImageResponse
+import java.time.LocalDateTime
+
 class Blog(
-    val blogUrl: String,
+    val title: String,
+    val link: String,
+    val description: String,
+    val lastBuildDate: LocalDateTime,
+    val imageResponse: ImageResponse?,
+    items: List<BlogPost>,
 ) : PostCollection {
-    var posts: BlogPosts = BlogPosts()
+    var posts: BlogPosts = BlogPosts(items)
         private set
 
     init {
-        require(blogUrl.contains(VALID_PROTOCOL)) { EXCEPTION_INVALID_PROTOCOL }
+        require(link.contains(VALID_PROTOCOL)) { EXCEPTION_INVALID_PROTOCOL }
     }
 
     override suspend fun update(newPosts: List<Post>) {

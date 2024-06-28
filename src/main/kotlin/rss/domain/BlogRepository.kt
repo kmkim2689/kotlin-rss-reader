@@ -1,9 +1,9 @@
 package rss.domain
 
 interface BlogRepository {
-    suspend fun postsByUrl(
+    suspend fun blog(
         url: String,
         count: Int,
         sort: Sort
-    ): List<Post>
+    ): Result<Blog>
 }
