@@ -1,0 +1,16 @@
+package rss.domain.reader
+
+import rss.domain.Sort
+import rss.domain.post.Post
+
+interface RssReader {
+    suspend fun updateBlogs(
+        count: Int,
+        sortBy: Sort,
+    )
+
+    fun postsWithKeyword(
+        keyword: String,
+        count: Int,
+    ): List<Post>
+}
