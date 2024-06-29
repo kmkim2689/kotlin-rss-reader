@@ -13,11 +13,9 @@ class DefaultBlogRepository(
         url: String,
         count: Int,
         sort: Sort,
-    ): Result<Blog> {
-        return runCatching {
-            blogRemoteDataSource
-                .postsByUrl(url)
-                .toBlog(count)
-        }
+    ): Blog {
+        return blogRemoteDataSource
+            .postsByUrl(url)
+            .toBlog(count)
     }
 }

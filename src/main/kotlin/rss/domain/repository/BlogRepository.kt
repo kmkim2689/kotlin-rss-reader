@@ -8,5 +8,5 @@ interface BlogRepository {
         url: String,
         count: Int,
         sort: Sort,
-    ): Result<Blog>
+    ): Blog
 }

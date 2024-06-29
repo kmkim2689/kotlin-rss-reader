@@ -17,15 +17,12 @@ class DefaultBlogsRepository(
         urls: List<String>,
         count: Int,
         sort: Sort,
-    ): Result<List<Blog>> =
-        runCatching {
-            urls
-                .map {
-                    blog(it, count, sort)
-                }
-                .awaitAll()
-                .filterNotNull()
-        }
+    ): List<Blog> {
+        return urls
+            .map {
+                blog(it, count, sort)
+            }.awaitAll()
+    }
 
     private fun blog(
         url: String,
@@ -34,6 +31,5 @@ class DefaultBlogsRepository(
     ) = scope.async(Dispatchers.IO) {
         blogRepository
             .blog(url, count, sort)
-            .getOrNull()
     }
 }

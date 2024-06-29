@@ -24,7 +24,7 @@ data class DefaultRssReader(
                 urls = blogUrls,
                 count = count,
                 sort = sortBy,
-            ).getOrThrow()
+            )
     }
 
     override fun postsWithKeyword(

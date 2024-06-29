@@ -63,6 +63,6 @@ class ConsoleRssReaderController(
 
     companion object {
         private const val DEFAULT_COUNT = 10
-        private const val LOADING_INTERVAL_MILLISECONDS = 60000L
+        private const val LOADING_INTERVAL_MILLISECONDS = 600000L
     }
 }
