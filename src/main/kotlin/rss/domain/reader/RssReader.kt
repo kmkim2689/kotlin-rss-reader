@@ -4,7 +4,7 @@ import rss.domain.Sort
 import rss.domain.post.Post
 
 interface RssReader {
-    suspend fun updateBlogs(
+    suspend fun initialize(
         count: Int,
         sortBy: Sort,
     )
@@ -13,4 +13,6 @@ interface RssReader {
         keyword: String,
         count: Int,
     ): List<Post>
+
+    suspend fun update(count: Int, sortBy: Sort): Boolean
 }

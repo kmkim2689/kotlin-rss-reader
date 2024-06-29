@@ -28,7 +28,7 @@ class ConsoleRssReaderController(
 
     suspend fun start() {
         reader.addUrl(*urls.toTypedArray())
-        updateBlogContents()
+        initializeBlogContents()
         launchLoadingContents()
         launchSearchingKeyword()
     }
@@ -55,9 +55,20 @@ class ConsoleRssReaderController(
             }
     }
 
-    private suspend fun updateBlogContents() {
+    private suspend fun initializeBlogContents() {
         LoadingView.showLoading()
-        reader.updateBlogs(DEFAULT_COUNT, Sort.LATEST)
+        reader.initialize(DEFAULT_COUNT, Sort.LATEST)
+        BlogContentOutputView.logContents(reader.blogs)
+    }
+
+    private suspend fun updateBlogContents() = with(LoadingView) {
+        showUpdateLoading()
+        val updated = reader.update(DEFAULT_COUNT, Sort.LATEST)
+        if (!updated) {
+            showNotUpdatedNotification()
+            return
+        }
+        showUpdatedNotification()
         BlogContentOutputView.logContents(reader.blogs)
     }
 
