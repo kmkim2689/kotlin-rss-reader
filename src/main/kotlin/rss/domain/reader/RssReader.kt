@@ -15,5 +15,8 @@ interface RssReader {
         count: Int,
     ): List<Post>
 
-    suspend fun update(count: Int, sortBy: Sort): Result<UpdateStatus>
+    suspend fun update(
+        count: Int,
+        sortBy: Sort,
+    ): Result<UpdateStatus>
 }

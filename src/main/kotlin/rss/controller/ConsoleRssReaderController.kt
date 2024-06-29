@@ -62,19 +62,20 @@ class ConsoleRssReaderController(
         BlogContentOutputView.logContents(reader.blogs)
     }
 
-    private suspend fun updateBlogContents() = with(LoadingView) {
-        showUpdateLoading()
-        val updateStatus = reader.update(DEFAULT_COUNT, Sort.LATEST).getOrThrow()
-        when (updateStatus) {
-            UpdateStatus.UPDATED -> {
-                showUpdatedNotification()
-                BlogContentOutputView.logContents(reader.blogs)
-            }
-            UpdateStatus.UP_TO_DATE -> {
-                showNotUpdatedNotification()
+    private suspend fun updateBlogContents() =
+        with(LoadingView) {
+            showUpdateLoading()
+            val updateStatus = reader.update(DEFAULT_COUNT, Sort.LATEST).getOrThrow()
+            when (updateStatus) {
+                UpdateStatus.UPDATED -> {
+                    showUpdatedNotification()
+                    BlogContentOutputView.logContents(reader.blogs)
+                }
+                UpdateStatus.UP_TO_DATE -> {
+                    showNotUpdatedNotification()
+                }
             }
         }
-    }
 
     companion object {
         private const val DEFAULT_COUNT = 10

@@ -28,12 +28,13 @@ class DefaultBlogRemoteDataSource : BlogRemoteDataSource {
         val description = channelNode.parseTextContent("description", 0)
         val lastBuildDate = channelNode.parseTextContent("lastBuildDate", 0)
 
-        val imageResponse = (channelNode.getElementsByTagName("image").item(0) as? Element)?.let {
-            val imageUrl = it.parseTextContent("url", 0)
-            val imageTitle = it.parseTextContent("title", 0)
-            val imageLink = it.parseTextContent("link", 0)
-            ImageResponse(imageTitle.await(), imageUrl.await(), imageLink.await())
-        }
+        val imageResponse =
+            (channelNode.getElementsByTagName("image").item(0) as? Element)?.let {
+                val imageUrl = it.parseTextContent("url", 0)
+                val imageTitle = it.parseTextContent("title", 0)
+                val imageLink = it.parseTextContent("link", 0)
+                ImageResponse(imageTitle.await(), imageUrl.await(), imageLink.await())
+            }
 
         val itemTags = channelNode.getElementsByTagName("item")
 
@@ -51,7 +52,7 @@ class DefaultBlogRemoteDataSource : BlogRemoteDataSource {
                             itemTitle.await(),
                             itemLink.await(),
                             itemPubDate.await(),
-                            itemDescription.await()
+                            itemDescription.await(),
                         )
                     }
                 }
