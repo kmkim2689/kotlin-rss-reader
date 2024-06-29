@@ -1,6 +1,7 @@
 package rss.domain.reader
 
 import rss.domain.Sort
+import rss.domain.UpdateStatus
 import rss.domain.collection.Blog
 import rss.domain.post.Post
 import rss.domain.repository.BlogsRepository
@@ -25,30 +26,13 @@ data class DefaultRssReader(
     override suspend fun update(
         count: Int,
         sortBy: Sort,
-    ): Boolean {
+    ): Result<UpdateStatus> {
         val fetchedBlogs = blogs(count, sortBy)
         val updated = updatedOrNot(fetchedBlogs)
-        if (updated) _blogs = fetchedBlogs
-        return updated
+        if (!updated) return Result.success(UpdateStatus.UP_TO_DATE)
+        _blogs = fetchedBlogs
+        return Result.success(UpdateStatus.UPDATED)
     }
-
-    private fun updatedOrNot(
-        fetchedBlogs: List<Blog>
-    ): Boolean {
-        return blogs
-            .zip(fetchedBlogs) { oldValue, newValue ->
-                oldValue.lastBuildDate != newValue.lastBuildDate
-            }.contains(true)
-    }
-
-    private suspend fun blogs(count: Int, sortBy: Sort): List<Blog> {
-        return blogsRepository.blogs(
-            urls = blogUrls,
-            count = count,
-            sort = sortBy,
-        )
-    }
-
 
     override fun postsWithKeyword(
         keyword: String,
@@ -61,5 +45,23 @@ data class DefaultRssReader(
                 .flatten()
 
         return posts.filter { keyword in it.metaData.title || keyword in it.content }
+    }
+
+    private fun updatedOrNot(
+        fetchedBlogs: List<Blog>
+    ): Boolean {
+        return blogs
+            .zip(fetchedBlogs) { oldValue, newValue ->
+                oldValue.lastBuildDate != newValue.lastBuildDate
+            }.contains(true)
+    }
+
+
+    private suspend fun blogs(count: Int, sortBy: Sort): List<Blog> {
+        return blogsRepository.blogs(
+            urls = blogUrls,
+            count = count,
+            sort = sortBy,
+        )
     }
 }

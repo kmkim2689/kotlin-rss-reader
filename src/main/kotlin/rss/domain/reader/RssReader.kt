@@ -1,6 +1,7 @@
 package rss.domain.reader
 
 import rss.domain.Sort
+import rss.domain.UpdateStatus
 import rss.domain.post.Post
 
 interface RssReader {
@@ -14,5 +15,5 @@ interface RssReader {
         count: Int,
     ): List<Post>
 
-    suspend fun update(count: Int, sortBy: Sort): Boolean
+    suspend fun update(count: Int, sortBy: Sort): Result<UpdateStatus>
 }

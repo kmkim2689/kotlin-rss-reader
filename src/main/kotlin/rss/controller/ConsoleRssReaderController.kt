@@ -6,6 +6,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import rss.domain.Sort
+import rss.domain.UpdateStatus
 import rss.domain.reader.DefaultRssReader
 import rss.domain.repository.BlogsRepository
 import rss.view.BlogContentOutputView
@@ -63,13 +64,16 @@ class ConsoleRssReaderController(
 
     private suspend fun updateBlogContents() = with(LoadingView) {
         showUpdateLoading()
-        val updated = reader.update(DEFAULT_COUNT, Sort.LATEST)
-        if (!updated) {
-            showNotUpdatedNotification()
-            return
+        val updateStatus = reader.update(DEFAULT_COUNT, Sort.LATEST).getOrThrow()
+        when (updateStatus) {
+            UpdateStatus.UPDATED -> {
+                showUpdatedNotification()
+                BlogContentOutputView.logContents(reader.blogs)
+            }
+            UpdateStatus.UP_TO_DATE -> {
+                showNotUpdatedNotification()
+            }
         }
-        showUpdatedNotification()
-        BlogContentOutputView.logContents(reader.blogs)
     }
 
     companion object {
