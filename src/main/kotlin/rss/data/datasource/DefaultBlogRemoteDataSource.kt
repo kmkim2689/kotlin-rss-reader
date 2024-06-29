@@ -5,7 +5,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.withContext
-import org.w3c.dom.Document
+import org.w3c.dom.Element
 import rss.data.model.BlogPostResponse
 import rss.data.model.BlogResponse
 import rss.data.model.ImageResponse
@@ -22,32 +22,37 @@ class DefaultBlogRemoteDataSource : BlogRemoteDataSource {
             }
         val channels = xml.getElementsByTagName("channel")
 
-        val channelNode = channels.item(0)
-        val channelDocument = channelNode.ownerDocument
-        val title = channelDocument.parseTextContent("title", 0)
-        val link = channelDocument.parseTextContent("link", 0)
-        val description = channelDocument.parseTextContent("description", 0)
-        val lastBuildDate = channelDocument.parseTextContent("lastBuildDate", 0)
+        val channelNode = channels.item(0) as Element
+        val title = channelNode.parseTextContent("title", 0)
+        val link = channelNode.parseTextContent("link", 0)
+        val description = channelNode.parseTextContent("description", 0)
+        val lastBuildDate = channelNode.parseTextContent("lastBuildDate", 0)
 
-        val imageNode = channelDocument.getElementsByTagName("image").item(0)
-        val imageDocument = imageNode.ownerDocument
-        val imageUrl = imageDocument.parseTextContent("url", 0)
-        val imageTitle = imageDocument.parseTextContent("title", 0)
-        val imageLink = imageDocument.parseTextContent("link", 0)
-        val imageResponse = ImageResponse(imageTitle.await(), imageUrl.await(), imageLink.await())
+        val imageResponse = (channelNode.getElementsByTagName("image").item(0) as? Element)?.let {
+            val imageUrl = it.parseTextContent("url", 0)
+            val imageTitle = it.parseTextContent("title", 0)
+            val imageLink = it.parseTextContent("link", 0)
+            ImageResponse(imageTitle.await(), imageUrl.await(), imageLink.await())
+        }
 
-        val itemTags = channelDocument.getElementsByTagName("item")
+        val itemTags = channelNode.getElementsByTagName("item")
 
         val items =
             (0..<itemTags.length).map { index ->
                 withContext(Dispatchers.Default) {
                     async {
-                        val itemDocument = itemTags.item(index).ownerDocument
-                        val itemTitle = itemDocument.parseTextContent("title", index)
-                        val itemLink = itemDocument.parseTextContent("link", index)
-                        val itemPubDate = itemDocument.parseTextContent("pubDate", index)
-                        val itemDescription = itemDocument.parseTextContent("description", index)
-                        BlogPostResponse(itemTitle.await(), itemLink.await(), itemPubDate.await(), itemDescription.await())
+                        val itemElement = itemTags.item(index) as Element
+                        val itemTitle = itemElement.parseTextContent("title", 0)
+                        val itemLink = itemElement.parseTextContent("link", 0)
+                        val itemPubDate = itemElement.parseTextContent("pubDate", 0)
+                        val itemDescription = itemElement.parseTextContent("description", 0)
+
+                        BlogPostResponse(
+                            itemTitle.await(),
+                            itemLink.await(),
+                            itemPubDate.await(),
+                            itemDescription.await()
+                        )
                     }
                 }
             }
@@ -62,7 +67,7 @@ class DefaultBlogRemoteDataSource : BlogRemoteDataSource {
         )
     }
 
-    private suspend fun Document.parseTextContent(
+    private suspend fun Element.parseTextContent(
         tagName: String,
         index: Int = 0,
     ): Deferred<String> {
